@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ goods.name }} - 校园二手商城{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {% if goods.image %}
+        <img src="{{ goods.image.url }}" class="img-fluid rounded" alt="{{ goods.name }}">
+        {% else %}
+        <div class="bg-light text-center py-5 rounded">暂无图片</div>
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <h3>{{ goods.name }}</h3>
+        <p class="text-danger fs-4">价格：¥{{ goods.price }}</p>
+        <p>分类：{{ goods.category }}</p>
+        <p>发布人：{{ goods.student|default:"匿名" }}</p>
+        <p>发布时间：{{ goods.created_at|date:"Y-m-d H:i" }}</p>
+        <hr>
+        <p>{{ goods.description }}</p>
+        <a href="{% url 'goods_edit' goods.id %}" class="btn btn-warning">编辑商品</a>
+        <a href="{% url 'goods_delete' goods.id %}" class="btn btn-danger" onclick="return confirm('确定删除该商品吗？')">删除商品</a>
+        <a href="{% url 'goods_list' %}" class="btn btn-secondary">返回列表</a>
+    </div>
+</div>
+{% endblock %}

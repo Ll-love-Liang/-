@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if form.instance.id %}编辑{% else %}添加{% endif %}学生 - 校园二手商城{% endblock %}
+
+{% block content %}
+<h3 class="mb-4">{% if form.instance.id %}编辑{% else %}添加{% endif %}学生</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary mt-3">保存</button>
+    <a href="{% url 'student_list' %}" class="btn btn-secondary mt-3">返回列表</a>
+</form>
+{% endblock %}
